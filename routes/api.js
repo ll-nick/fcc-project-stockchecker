@@ -51,11 +51,11 @@ module.exports = function (app) {
       const like = req.query.like === 'true';
 
       try {
-        if (typeof input === 'string') {
+        if (typeof stock === 'string') {
           const result = await getStock(stock, req.ip, like)
 
           res.json({
-            stockdata: {
+            stockData: {
               stock: stock.toUpperCase(),
               price: result.price,
               likes: result.likes
@@ -66,7 +66,7 @@ module.exports = function (app) {
           const result1 = await getStock(stock[1], req.ip, like)
 
           res.json({
-            stockdata: [{
+            stockData: [{
               stock: stock[0].toUpperCase(),
               price: result0.price,
               rel_likes: result0.likes - result1.likes
