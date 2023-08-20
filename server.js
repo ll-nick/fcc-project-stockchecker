@@ -4,6 +4,7 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const cors = require('cors');
 const mongoose = require('mongoose');
+const helmet = require('helmet');
 
 const apiRoutes = require('./routes/api.js');
 const fccTestingRoutes = require('./routes/fcctesting.js');
@@ -22,6 +23,15 @@ mongoose.connect(process.env.DB, {
   .catch(err => {
     console.error('Error connecting to MongoDB:', err);
   });
+
+app.use(helmet.contentSecurityPolicy({
+  directives: {
+    defaultSrc: ["'self'"],
+    scriptSrc: ["'self'"],
+    styleSrc: ["'self'"],
+  },
+}));
+
 
 app.use('/public', express.static(process.cwd() + '/public'));
 
