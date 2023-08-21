@@ -24,7 +24,7 @@ module.exports = function (app) {
 
       let ipExists = false;
       for (const ip of storedIPs) {
-        ipExists = await bcrypt.compare(ip, ip.hashedIP);
+        ipExists = await bcrypt.compare(String(ip), ip.hashedIP);
         if (ipExists) {
           break;
         }
